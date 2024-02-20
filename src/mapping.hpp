@@ -1,7 +1,9 @@
 #ifndef MAPPING_HPP
 #define MAPPING_HPP
 
-#include <Eigen/Dense>
+// #include <Eigen/Dense>
+#include <glm/mat4>
+#include <glm/vec3>
 
 using namespace Eigen;
 
