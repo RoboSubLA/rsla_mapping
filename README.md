@@ -13,6 +13,7 @@ sudo ./install-ros2-iron.sh -d
 
 Install glfw3 for the custom visualizer
 `sudo apt install libglfw3-dev`
+`sudo apt install libglm-dev`
 
 
 Clone the repo obviously dumbass silly
