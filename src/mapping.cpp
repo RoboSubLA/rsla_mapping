@@ -9,26 +9,24 @@
 
 Mapping::Mapping()
 {
-    //MapCell* default_cell = new MapCell;
+    // MapCell* default_cell = new MapCell;
 
     SpatialMap<int> spatial_map(3, 3, 3);
 
     int counter = 0;
-    for (int z = 0; z < spatial_map.size(2); z++) {
-        for (int y = 0; y < spatial_map.size(1); y++) {
-            for (int x = 0; x < spatial_map.size(0); x++) {
+    for (int z = 0; z < spatial_map.axis_size(2); z++) {
+        for (int y = 0; y < spatial_map.axis_size(1); y++) {
+            for (int x = 0; x < spatial_map.axis_size(0); x++) {
                 spatial_map.set(x, y, z, &counter);
             }
         }
     }
 
-
     spatial_map.print();
 
     MapCell i;
-    
-    std::cout << "default int: " << i.shape << std::endl;
 
+    std::cout << "default int: " << i.shape << std::endl;
 
     //
     // topographic map

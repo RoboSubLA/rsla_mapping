@@ -3,9 +3,9 @@
 <package format="3">
   <name>mapping</name>
   <version>0.0.1</version>
-  <description>RoboSub Mapping module</description>
+  <description>RoboSubLA Mapping Module</description>
   <maintainer email="eeckle@calstatela.edu">Silver1063</maintainer>
-  <license>Cool people license</license>
+  <license>License for HOT People</license>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
 

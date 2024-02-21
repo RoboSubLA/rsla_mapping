@@ -17,13 +17,13 @@ find_package(rclcpp REQUIRED)
 find_package(std_msgs REQUIRED)
 
 find_package(glm REQUIRED)
+
 find_package(GLEW REQUIRED)
 find_package(glfw3 3.3 REQUIRED)
 find_package(OpenGL REQUIRED)
 
 add_executable(driver src/mapping_node.cpp)
 
-target_link_libraries(driver glm::glm)
 target_link_libraries(driver GLEW)
 target_link_libraries(driver glfw)
 target_link_libraries(driver OpenGL::GL)

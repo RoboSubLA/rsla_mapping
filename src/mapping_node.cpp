@@ -3,10 +3,7 @@
 #include <memory>
 #include <string>
 
-// comment out one or the other not both or else
-//#define VISUALIZER 1
-
-
+// #define VISUALIZER
 #ifdef VISUALIZER
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
@@ -120,7 +117,7 @@ int main(int argc, char* argv[])
 
     // assumes you are running from workspace folder
     // if you get shader compile errors you probably need to change this
-    std::string path = "./src/lanturn_mapping/src/shaders/";
+    std::string path = "./src/rsla_mapping/src/shaders/";
 
     std::string vshader = path + "vshader.glsl";
     std::string fshader = path + "fshader.glsl";
@@ -128,7 +125,7 @@ int main(int argc, char* argv[])
     // const char *vshader = "/home/silver1063/ros2_ws/src/lanturn_mapping/src/shaders/vshader.glsl";
     // const char *fshader = "/home/silver1063/ros2_ws/src/lanturn_mapping/src/shaders/fshader.glsl";
 
-    GLuint programID = LoadShaders(vshader.c_str(), fshader.c_str());
+    GLuint programID = load_shaders(vshader.c_str(), fshader.c_str());
 
     GLuint timeUniformLocation = glGetUniformLocation(programID, "iTime");
 
@@ -175,7 +172,7 @@ int main(int argc, char* argv[])
 #ifndef VISUALIZER
     Mapping mapping;
     // process_mem_usage();
-    //rclcpp::spin(std::make_shared<MappingNode>());
+    // rclcpp::spin(std::make_shared<MappingNode>());
 #endif
 
     rclcpp::shutdown();

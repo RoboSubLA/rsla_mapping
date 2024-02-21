@@ -1,11 +1,8 @@
 #ifndef MAPPING_HPP
 #define MAPPING_HPP
 
-// #include <Eigen/Dense>
-#include <glm/mat4>
-#include <glm/vec3>
-
-using namespace Eigen;
+#include <glm/ext.hpp>
+#include <glm/glm.hpp>
 
 enum sdf_type {
     SDF_EMPTY,
@@ -23,7 +20,7 @@ enum object_type {
 
 struct MapCell {
     uint8_t shape = SDF_EMPTY;
-    Matrix4f transform = Matrix4f::Identity();
+    glm::mat4 transform = glm::mat4(1.0f);
     // std::string tags;
 };
 

@@ -1,7 +1,9 @@
 #ifndef SPATIAL_MAP_HPP
 #define SPATIAL_MAP_HPP
 
-#include <Eigen/Dense>
+#include <glm/ext.hpp>
+#include <glm/glm.hpp>
+
 #include <algorithm>
 #include <iostream>
 #include <vector>
@@ -11,78 +13,61 @@ class SpatialMap {
 public:
     SpatialMap(int x = 4, int y = 4, int z = 4)
     {
+        resize(x, y, z);
+
         T default_value;
         data.push_back(default_value);
 
-        layout_size(0) = x;
-        layout_size(1) = y;
-        layout_size(2) = z;
+        origin = glm::vec3(0.0f, 0.0f, 0.0f);
 
-        origin << 0, 0, 0;
-
-        layout.resize(x * y * z);
-
+        std::cout << "here" << std::endl;
         print();
 
-        for (T* elem : layout) {
+        std::cout << "here" << std::endl;
+        for (T* elem : grid) {
             elem = &default_value;
         }
 
+        std::cout << "here" << std::endl;
         print();
+
+        std::cout << "here" << std::endl;
     };
 
     ~SpatialMap() {};
 
     void set(int x, int y, int z, T* value)
     {
-        layout[x + (y * layout_size.x()) + (z * layout_size.x() * layout_size.y())] = value;
+        grid[x + (y * grid_size.x) + (z * grid_size.x * grid_size.y)] = value;
     }
 
     T* get(int x, int y, int z)
     {
-        return layout[x + (y * layout_size.x()) + (z * layout_size.x() * layout_size.y())];
+        return grid[x + (y * grid_size.x) + (z * grid_size.x * grid_size.y)];
     }
 
     void resize(int x, int y, int z)
     {
-        std::vector<T*> old_layout = layout;
+        std::vector<T*> old_grid = grid;
 
         // int* new_data = new int[x * y * z];
 
         // to do copy contents of data into new_data
 
-        layout.resize(x * y * z);
+        grid.resize(x * y * z);
+        grid_size = glm::vec3(x, y, z);
 
-        layout_size(0) = x;
-        layout_size(1) = y;
-        layout_size(2) = z;
-
-        std::cout << old_layout.size() << "    " << layout.size() << std::endl;
-    }
-
-    int flat_size()
-    {
-        return layout_size.x() * layout_size.y() * layout_size.z();
-    }
-
-    int size(int axis)
-    {
-        return layout_size(axis);
-    }
-
-    int data_size()
-    {
-        return data.size();
+        std::cout << old_grid.size() << "    " << grid.size() << std::endl;
     }
 
     void print()
     {
-        int count = flat_size();
+        int count = data.size();
 
         std::cout << count << std::endl;
 
-        for (std::vector<T*>::iterator it = layout.begin(); it != layout.end(); ++it) {
-            std::cout << *it << " ";
+        for (auto itter : grid) {
+            std::cout << *itter << " ";
         }
 
         std::cout << std::endl;
@@ -90,12 +75,34 @@ public:
         // std::cout << std::string(data.begin(), data.end()) << std::endl;
     }
 
-private:
-    Eigen::Vector3i layout_size;
-    Eigen::Vector3i origin;
+    int axis_size(int axis = 0)
+    {
+        int size;
 
+        switch (axis) {
+        case 0:
+            size = grid_size.x;
+            break;
+        case 1:
+            size = grid_size.y;
+            break;
+        case 2:
+            size = grid_size.z;
+            break;
+        }
+
+        return size;
+    }
+
+private:
+    std::vector<T*> grid;
     std::vector<T> data;
-    std::vector<T*> layout;
+    glm::vec3 grid_size;
+
+    // Origin of the space
+    glm::vec3 origin;
+    // AUV transform matrix
+    glm::mat4 transform = glm::mat4(1.0f);
 };
 
 #endif
