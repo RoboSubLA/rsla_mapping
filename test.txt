@@ -1,1 +1,0 @@
-this is just me checking to make sure i set up git right.
